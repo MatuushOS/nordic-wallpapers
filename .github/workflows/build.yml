@@ -42,4 +42,4 @@ jobs:
           distro: 'any-distro'     
           release: 'any-version'    
           republish: 'true'        
-          file: '$(ls | grep nordic*.deb)'  # debian package filename 
+          file: 'nordic-wallpapers_$(date -I)_1.deb'  # debian package filename 
