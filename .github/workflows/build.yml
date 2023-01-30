@@ -37,9 +37,9 @@ jobs:
           api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
           command: 'push'
           format: 'deb'
-          owner: 'matus-mastena-Hcr' # Your Cloudsmith account name or org name (namespace) 
-          repo: 'matuusos'         # Your Cloudsmith Repository name (slug)
-          distro: 'any-distro'     # Your Distribution  (i.e Debian, Ubuntu)
-          release: 'any-version'         # Your Distribution Release (i.e xenial, buster) 
-          republish: 'true'          # needed ONLY if version is not changing
-          file: '$(ls | grep nordic*)'  # debian package filename 
+          owner: 'matus-mastena-Hcr' 
+          repo: 'matuusos'         
+          distro: 'any-distro'     
+          release: 'any-version'    
+          republish: 'true'        
+          file: '$(ls | grep nordic*.deb)'  # debian package filename 
