@@ -40,7 +40,7 @@ jobs:
           format: 'deb'
           owner: 'matus-mastena-Hcr' 
           repo: 'matuusos'         
-          distro: 'any-distro'     
+          distro: 'debian'     
           release: 'any-version'    
           republish: 'true'        
           file: 'nordic-wallpapers.deb'  # debian package filename 
