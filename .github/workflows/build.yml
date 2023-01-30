@@ -30,7 +30,7 @@ jobs:
       - name: Build the package
         run: |
           makedeb -s
-          mv nordic*.deb nordic-wallpapers-$(date -I).deb
+          mv nordic*.deb nordic-wallpapers.deb
       - name: Push to the repo
         id: push
         uses: cloudsmith-io/action@master
@@ -43,4 +43,4 @@ jobs:
           distro: 'any-distro'     
           release: 'any-version'    
           republish: 'true'        
-          file: 'nordic-wallpapers-$(date -I).deb'  # debian package filename 
+          file: 'nordic-wallpapers.deb'  # debian package filename 
