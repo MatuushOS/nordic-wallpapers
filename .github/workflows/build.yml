@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Setup Makedeb
+        run: |
+          wget -qO - 'https://proget.makedeb.org/debian-feeds/makedeb.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/makedeb-archive-keyring.gpg 1> /dev/null
+          echo 'deb [signed-by=/usr/share/keyrings/makedeb-archive-keyring.gpg arch=all] https://proget.makedeb.org/ makedeb main' | sudo tee /etc/apt/sources.list.d/makedeb.list
+          sudo apt update
+          sudo apt install makedeb -y
+      # Runs a set of commands using the runners shell
+      - name: Build the package
+        run: |
+          makedeb -si
+      - name: Push to the repo
+        id: push
+        uses: cloudsmith-io/action@master
+        with:
+          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          command: 'push'
+          format: 'deb'
+          owner: 'matus-mastena-Hcr' # Your Cloudsmith account name or org name (namespace) 
+          repo: 'matuusos'         # Your Cloudsmith Repository name (slug)
+          distro: 'any-distro'     # Your Distribution  (i.e Debian, Ubuntu)
+          release: 'any-version'         # Your Distribution Release (i.e xenial, buster) 
+          republish: 'true'          # needed ONLY if version is not changing
+          file: 'nordic*.deb'  # debian package filename 
