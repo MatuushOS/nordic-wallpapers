@@ -42,4 +42,4 @@ jobs:
           distro: 'any-distro'     
           release: 'any-version'    
           republish: 'true'        
-          file: 'nordic-wallpapers_$(date -I)_1.deb'  # debian package filename 
+          file: 'nordic-wallpapers_$(date --iso-8601)_1.deb'  # debian package filename 
