@@ -12,6 +12,7 @@ md5sums=('SKIP')
 
 pkgver() {
 	cd "$pkgname"
+	echo $(TZ=UTC git log -1 --pretty='%cd' --date=short-local | tr -d '-')
 }
 
 package() {
